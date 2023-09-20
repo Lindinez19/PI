@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Evento {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -57,4 +57,4 @@ public class Evento {
 	}
 
 }
-//comentario
+
