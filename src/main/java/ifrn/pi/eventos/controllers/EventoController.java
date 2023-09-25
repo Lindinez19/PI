@@ -1,23 +1,45 @@
 package ifrn.pi.eventos.controllers;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import ifrn.pi.eventos.models.Evento;
+import ifrn.pi.eventos.repositores.EventoRepository;
 
 @Controller
+@RequestMapping("/eventos")
 public class EventoController {
 
-	@RequestMapping("/eventos/form")
+	@Autowired
+	private EventoRepository er;
+
+	@GetMapping("/form")
 	public String form() {
-		return "formEvento";
+		System.out.println("Chamou o form");
+		return "eventos/formEvento";
 	}
-	@RequestMapping(value = "/formulariook", method = RequestMethod.POST)
-	public String salvar(String nome, String local, String data, String horario) {
-		
-		System.out.println("Nome:" + nome);
-		System.out.println("data:" + data);
-		System.out.println("local:" + local);
-		System.out.println("horario:" + horario);
-		return "formConcluido";
+
+	@PostMapping
+	public String adicionar(Evento evento) {
+
+		System.out.println(evento);
+		er.save(evento);
+
+		return "redirect:/eventos";
+	}
+
+	@GetMapping
+	public ModelAndView listar() {
+		List<Evento> eventos = er.findAll();
+		ModelAndView mv = new ModelAndView("eventos/lista");
+		mv.addObject("eventos", eventos);
+		return mv;
+
 	}
 }
