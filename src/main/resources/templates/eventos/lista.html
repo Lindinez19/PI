@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Eventos</title>
+</head>
+<body>
+    <div th:replace="~{menu :: menu}"></div>
+    <div class="container">
+    <h1>Lista de Eventos</h1>
+   
+    <table>
+        <thead>
+            <tr>
+              <th>Id</th>
+              <th>Nome</th>
+              <th>Local</th>
+              <th>Data</th>
+              <th>Horario</th>  
+              <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each ="e : ${eventos}">
+                <td th:text="${e.id}">1</td>
+                <td><a th:href="@{/eventos/{id}(id=${e.id})}"><span th:text="${e.nome}">Aniversario de Gabis </span></a></td>
+                <td th:text="${e.local}">Angicos</td>
+                <td th:text="${e.data}">19/06/2025</td>
+                <td th:text="${e.horario}">19:00</td>
+                <td><a th:href="@{/eventos/{id}/remover(id=${e.id})}"><i class="material-icons">delete</i></a></td>
+            </tr>
+        </tbody> 
+    </table>
+</body>
+</html>
