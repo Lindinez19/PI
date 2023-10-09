@@ -80,7 +80,7 @@ public class EventoController {
 		return "redirect:/eventos/{idEvento}";
 	}
 
-	@GetMapping("/{id}/selecionar")
+	@GetMapping("/{id}/editar")
 	public ModelAndView selecionarEvento(@PathVariable Long id) {
 		ModelAndView md = new ModelAndView();
 		Optional<Evento> opt = er.findById(id);
@@ -96,7 +96,7 @@ public class EventoController {
 		return md;
 	}
 
-	@GetMapping("/{idEvento}/convidados/{idConvidado}/selecionar")
+	@GetMapping("/{idEvento}/convidados/{idConvidado}/editar")
 	public ModelAndView selecionarConvidado(@PathVariable Long idEvento, @PathVariable Long idConvidado) {
 		ModelAndView md = new ModelAndView();
 
@@ -110,7 +110,8 @@ public class EventoController {
 
 		Evento evento = optEvento.get();
 		Convidado convidado = optConvidado.get();
-		if (!evento.getId().equals(convidado.getEvento().getId())) {
+		
+		if (evento.getId()!= convidado.getEvento().getId()) {
 			md.setViewName("redirect:/eventos");
 			return md;
 		}
@@ -153,5 +154,6 @@ public class EventoController {
 
 		return "redirect:/eventos/{idEvento}";
 	}
-}
 
+
+}

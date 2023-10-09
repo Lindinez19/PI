@@ -28,12 +28,14 @@
 			<tbody>
 				<tr th:each="e : ${eventos}">
 					<td th:text="${e.id}">1</td>
-					<td><a th:href="@{/eventos/{id}(id=${e.id})}"><span th:text="${e.nome}">Aniversario de Gabis</span></a></td>
+					<td><a th:href="@{/eventos/{id}(id=${e.id})}">
+					<span th:text="${e.nome}">Aniversario de Gabis</span></a></td>
 					<td th:text="${e.local}">Angicos</td>
 					<td th:text="${e.data}">19/06/2025</td>
 					<td th:text="${e.horario}">19:00</td>
 					<td>
 						<a th:href="@{/eventos/{id}/remover(id=${e.id})}"><i class="material-icons">delete</i></a>
+						<a th:href="@{/eventos/{id}/editar(id=${e.id})}"><i class="material-icons">edit</i></a>
 					</td>
 				</tr>
 			</tbody>
